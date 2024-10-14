@@ -11,60 +11,74 @@
 ********************************************************************************/
 
 const projectData = require("./modules/project");
-const express = require('express')
-const app = express()
-const port = 3000
-require('pg');
-const Sequelize = require('sequelize');
+const express = require('express');
+const app = express();
+const path = require('path');
 
-app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/public'));
-app.get('/css/main.css', (req,res) => {
-    res.sendFile(__dirname, '/public/css/main.css');
-})
+// Set views and static files directory
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
+// Serve CSS correctly
+app.get('/css/main.css', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'css', 'main.css'));
+});
 
+// Initialize project data
 projectData.initialize().then(() => {
-    app.listen(port, () => {
-        console.log(`App listening on port ${port}`)
-      })
-})
+    console.log("Project data initialized successfully.");
+}).catch((error) => {
+    console.log("Error initializing project data:", error);
+});
 
-app.get('/', (req,res) => {
-    res.sendFile(__dirname, + '/views' + '/home.html');
-})
+// Route for homepage
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'home.html'));
+});
 
-app.get('/about', (req,res) => {
-    res.sendFile(__dirname, + '/views' + '/about.html');
-})
+// Route for about page
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'about.html'));
+});
 
-app.get('/solutions/projects/:id', (req,res) => {
-    console.log(req.query.sector);
+// Route for project by ID
+app.get('/solutions/projects/:id', (req, res) => {
     const projectID = parseInt(req.params.id);
     projectData.getProjectById(projectID)
         .then(project => {
             res.send(project);
         })
-        .catch (error => {
-            res.status(404).sendFile(__dirname, + '/views' + '/404.html');
+        .catch(error => {
+            res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
         });
-})
+});
 
-app.get('/solutions/projects',(req,res) => {
+// Route for projects with optional sector query
+app.get('/solutions/projects', (req, res) => {
     const sector = req.query.sector;
     if (sector) {
-    projectData.getProjectsBySector(sector)
-        .then(sectors => {
-            res.send(sectors);
-        })
-        .catch (error => {
-            res.status(404).sendFile(__dirname, + '/views' + '/404.html');
-        });
+        projectData.getProjectsBySector(sector)
+            .then(sectors => {
+                res.send(sectors);
+            })
+            .catch(error => {
+                res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+            });
     } else {
-        res.send(projectData.getAllProjects());
+        projectData.getAllProjects()
+            .then(projects => {
+                res.send(projects);
+            })
+            .catch(error => {
+                res.status(500).send({ error: "Error retrieving all projects" });
+            });
     }
-})
+});
 
-app.use((req, res, next) => {
-    res.status(404).sendFile(__dirname, + '/views' + '/404.html');
-  });
+// 404 handler for all other routes
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+});
+
+// Export the app for Vercel
+module.exports = app;
