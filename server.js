@@ -24,7 +24,7 @@ app.get('/css/main.css', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'css', 'main.css'));
 });
 
-// Initialize project data
+// Initialize data
 projectData.initialize().then(() => {
     console.log("Project data initialized successfully.");
 }).catch((error) => {
