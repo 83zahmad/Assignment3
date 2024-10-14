@@ -33,12 +33,12 @@ projectData.initialize().then(() => {
 
 // Route for homepage
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'home.html'));
+    res.sendFile(path.join(__dirname, 'views', 'home'));
 });
 
 // Route for about page
 app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'about.html'));
+    res.sendFile(path.join(__dirname, 'views', 'about'));
 });
 
 // Route for project by ID
