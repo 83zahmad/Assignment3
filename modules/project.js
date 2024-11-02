@@ -1,4 +1,4 @@
-<!-- /********************************************************************************
+ /********************************************************************************
 * BTI325 – Assignment 04
 *
 * I declare that this assignment is my own work in accordance with Seneca's
@@ -8,7 +8,7 @@
 *
 * Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 2nd 2024
 *
-********************************************************************************/ -->
+********************************************************************************/
 const projectData = require("../data/projectData");
 const sectorData = require("../data/sectorData");
 
