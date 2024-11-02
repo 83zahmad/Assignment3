@@ -1,22 +1,18 @@
 /********************************************************************************
-* BTI325 – Assignment 03
+* BTI325 – Assignment 04
 *
 * I declare that this assignment is my own work in accordance with Seneca's
 * Academic Integrity Policy:
 *
 * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 *
-* Name: Zeeshaun Ahmad Student ID: 158043224  Date: October 13th 2024
+* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 2nd 2024
 *
 ********************************************************************************/
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './*.html',
-    './views/**/*.html',
-    './views/*.html',
-    './src/**/*.{html,js}',
-    './src/**/*.{html,js}'
+     `./views/**/*.ejs`
   ],
   theme: {
     extend: {},

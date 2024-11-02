@@ -1,0 +1,71 @@
+<!-- /********************************************************************************
+* BTI325 – Assignment 04
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+*
+* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 2nd 2024
+*
+********************************************************************************/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <%- include('partials/navbar', {page: ""}) %>
+      <br>
+      <div class="container mx-auto">
+        <div class="hero bg-base-200 rounded-lg p-6">
+          <div class="hero-content text-center ">
+            <div class="max-w-md">
+              <h1 class="text-5xl font-bold"> <%= project.title %></h1>
+    
+              <p class="py-6">Below, you will find detailed information about the project: <%= project.title %></p>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="grid grid-cols-1 gap-4">
+          <div>
+            <div class="card bg-base-100 shadow-xl">
+              <figure>
+                <img class="w-full" src= <%= project.feature_img_url%>>
+              </figure>
+              <div class="card-body">
+                <p class="py-6"><%=project.intro_short%></p>
+                <p class="py-6"><%=project.impact%></p>
+                <p class="py-6">More Information: <a href="<%=project.original_source_url%>"><%=project.original_source_url%></a></p>
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      fetch("https://dummyjson.com/quotes/random")
+                        .then(response => response.json())
+                        .then(data => {
+                          document.getElementById("quote").textContent = `"${data.quote}"`;
+                          document.getElementById("author").textContent = `- ${data.author}`;
+                        })
+                        .catch(error => {
+                          console.error("Error fetching quote:", error);
+                        });
+                    });
+                  </script>
+                  <div class="quote-section p-6 mt-6 bg-gray-100 rounded-lg">
+                    <h3 class="text-xl font-bold">Quote of the Day</h3>
+                    <p id="quote" class="mt-4 italic"></p>
+                    <p id="author" class="text-right font-semibold"></p>
+                  </div>
+                  <button class="btn btn-secondary mt-6" onclick="history.back(); return false;">Go Back</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

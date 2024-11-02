@@ -1,0 +1,62 @@
+<!-- /********************************************************************************
+* BTI325 – Assignment 04
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+*
+* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 2nd 2024
+*
+********************************************************************************/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body tabindex="-1">
+  <%- include('partials/navbar', {page: '/about'}) %>
+  <div class="container mx-auto p-4">
+    <div class="hero bg-base-200 rounded-lg p-6">
+      <div class="hero-content text-center">
+        <div class="max-w-lg">
+          <h1 class="text-5xl font-bold">Projects</h1>
+          <p class="py-6">
+            Browse the current list of Projects in our database. Click the theme to filter by sectors such as:
+            <br><br>
+            <a href="/solutions/projects?sector=Industry" class="btn btn-primary btn-xs">Industry</a>
+            <a href="/solutions/projects?sector=Transportation" class="btn btn-primary btn-xs">Transportation</a>
+            <a href="/solutions/projects?sector=Electricity" class="btn btn-primary btn-xs">Electricity</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="overflow-x-auto">
+      <table class="table table-zebra w-full">
+        <tbody>
+          <% projects.forEach(project => { %>
+            <tr>
+              <td class="font-bold"><%= project.title %></td>
+              <td>
+                <a href="/solutions/projects?sector=<%= project.sector %>" class="btn btn-xs mt-2">
+                  <%= project.sector %>
+                </a>
+              </td>
+              <td><%= project.summary_short %></td>
+              <td>
+                <a href="/solutions/projects/<%= project.id %>" class="btn btn-xs">details</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+<div id="my-app"></div></body>
+</html>

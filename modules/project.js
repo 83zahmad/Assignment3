@@ -1,3 +1,14 @@
+<!-- /********************************************************************************
+* BTI325 – Assignment 04
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+*
+* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 2nd 2024
+*
+********************************************************************************/ -->
 const projectData = require("../data/projectData");
 const sectorData = require("../data/sectorData");
 
@@ -21,8 +32,11 @@ function initialize() {
 }
 
 function getAllProjects() {
-    return projects;
+    return new Promise((resolve) => {
+        resolve(projects);
+    });
 }
+
 
 function getProjectById(projectID) {
     return new Promise((resolve, reject) => {
