@@ -1,28 +1,17 @@
  /********************************************************************************
 * BTI325 – Assignment 05
-=======
-* BTI325 – Assignment 04
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
 *
 * I declare that this assignment is my own work in accordance with Seneca's
 * Academic Integrity Policy:
 *
 * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 *
-<<<<<<< HEAD
 * Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 15th 2024
 *
 ********************************************************************************/
 require('dotenv').config();
 require('pg');
 const Sequelize = require('sequelize'); 
-=======
-* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 2nd 2024
-*
-********************************************************************************/
-const projectData = require("../data/projectData");
-const sectorData = require("../data/sectorData");
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
 
 let sequelize = new Sequelize(process.env.PGDATABASE,process.env.PGUSER,process.env.PGPASSWORD, {
     host: process.env.PGHOST,
@@ -77,7 +66,6 @@ function initialize(){
 };
 
 function getAllProjects() {
-<<<<<<< HEAD
     return new Promise((resolve, reject) => {
         Project.findAll({
             include: [Sector],
@@ -102,19 +90,11 @@ function getAllProjects() {
             .catch(err => {
                 reject(`Error retrieving projects: ${err}`);
             });
-=======
-    return new Promise((resolve) => {
-        resolve(projects);
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
     });
 }
 
 
-<<<<<<< HEAD
 function getProjectById(projectId) {
-=======
-function getProjectById(projectID) {
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
     return new Promise((resolve, reject) => {
         Project.findOne({
             include: [Sector], 
