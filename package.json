@@ -5,17 +5,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "build": "npx tailwindcss -i ./public/tailwind.css -o ./public/css/main.css",
     "tw:build": "npx tailwindcss -i ./public/tailwind.css -o ./public/css/main.css --watch"
   },
   "author": "Zeeshaun Ahmad",
   "license": "ISC",
-  "description": "",
+  "description": "Assignment 2 for BTI325",
   "dependencies": {
     "@tailwindcss/typography": "^0.5.15",
-<<<<<<< HEAD
-    "dotenv": "^16.4.5",
-=======
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
     "ejs": "^3.1.10",
     "express": "^4.21.0",
     "nodemon": "^3.1.7",
