@@ -1,0 +1,69 @@
+<!-- /********************************************************************************
+* BTI325 – Assignment 05
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+*
+* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 15th 2024
+*
+********************************************************************************/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Project</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <%- include('partials/navbar', {page: ''}) %>
+    <br>
+    <div class="container mx-auto">
+        <div class="hero bg-base-200 rounded-lg p-6">
+            <div class="hero-content text-center">
+                <div class="max-w-md">
+                    <h1 class="text-7xl font-bold">Edit Project <%= project.title %></h1>
+                    <p class="py-6">Please Edit the Project Below</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h2 class="card-title">Edit the Project <%= project.title%> </h2>
+            <form method="post" action="/solutions/editProject" enctype="application/x-www-form-urlencoded">
+                <input type="hidden" name="id" value="<%= project.id %>">
+                <label for="title">Title:</label><br/>
+                <input type="text" value="<%= project.title%>" id="title" name="title" required class="w-full border rounded p-2"/><br/>
+                
+                <label for="feature_img_url">Feature Image URL:</label><br/>
+                <input type="url" value="<%=project.feature_img_url%>" id="feature_img_url" name="feature_img_url" required class="w-full border rounded p-2"/><br/>
+                
+                <label for="sector_id">Sector:</label><br/>
+                <select id="sector_id" name="sector_id" required class="w-full border rounded p-2">
+                    <% sectors.forEach(sector => { %>
+                        <option <%= (project.sector_id === sector.id) ? "selected" : "" %> value="<%= sector.id %>">
+                            <%= sector.sector_name %>
+                        </option>
+                    <% }) %>
+                </select>
+                </select><br/>
+                
+                <label for="intro_short">Short Introduction:</label><br/>
+                <textarea id="intro_short" name="intro_short" required class="w-full border rounded p-2"><%=project.intro_short%></textarea><br/>
+                
+                <label for="summary_short">Short Summary:</label><br/>
+                <textarea id="summary_short" name="summary_short" required class="w-full border rounded p-2"><%=project.summary_short%></textarea><br/>
+                
+                <label for="impact">Impact:</label><br/>
+                <textarea id="impact" name="impact" required class="w-full border rounded p-2"><%=project.impact%></textarea><br/>
+                
+                <label for="original_source_url">Original Source URL:</label><br/>
+                <input type="url" value="<%=project.original_source_url%>" id="original_source_url" name="original_source_url" required class="w-full border rounded p-2"/><br/>
+                
+                <button type="submit" class="btn btn-success mt-6">Update Project</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

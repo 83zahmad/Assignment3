@@ -1,12 +1,12 @@
 /********************************************************************************
-* BTI325 – Assignment 04
+* BTI325 – Assignment 05
 *
 * I declare that this assignment is my own work in accordance with Seneca's
 * Academic Integrity Policy:
 *
 * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 *
-* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 2nd 2024
+* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 15th 2024
 *
 ********************************************************************************/
 
@@ -15,7 +15,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-// Set views and static files directory
+app.use(express.urlencoded({ extended: true }));
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
@@ -23,18 +25,16 @@ app.set('view engine', 'ejs');
 const HTTP_PORT = process.env.PORT || 8080;
 
 
-
-// Route for homepage
 app.get('/', (req, res) => {
     res.render('home');
 });
 
-// Route for about page
+
 app.get('/about', (req, res) => {
     res.render('about');
 });
 
-// Route for project by ID
+
 app.get('/solutions/projects/:id', (req, res) => {
     const projectID = parseInt(req.params.id);
     projectData.getProjectById(projectID)
@@ -46,7 +46,7 @@ app.get('/solutions/projects/:id', (req, res) => {
         });
 });
 
-// Route for projects with optional sector query
+
 app.get('/solutions/projects', (req, res) => {
     const sector = req.query.sector;
     if (sector) {
@@ -63,18 +63,77 @@ app.get('/solutions/projects', (req, res) => {
                 res.render("projects", {projects: projects});
             })
             .catch(error => {
+                console.log("Projects error:");
                 res.status(404).render("404", {message: "I'm sorry, we're unable to find what you're looking for"});
             });
     }
 });
 
 
-// 404 handler for all other routes
+app.get('/solutions/addProject', (req, res) => {
+    projectData.getAllSectors()
+        .then(sectors => {
+            res.render('addProject', { sectors: sectors });
+        })
+        .catch(error => {
+            res.status(500).render('500', { message: `Unable to load sectors: ${error}` });
+        });
+});
+
+app.post('/solutions/addProject', (req, res) => {
+    projectData.addProject(req.body)
+        .then(() => {
+            res.redirect('/solutions/projects');
+        })
+        .catch(error => {
+            res.render('500', { message: `I'm sorry, but we have encountered the following error: ${error}` });
+        });
+});
+
+app.get('/solutions/editProject/:id', async (req, res) => {
+    const projectId = parseInt(req.params.id);
+
+    if (isNaN(projectId)) {
+        return res.status(400).render('404', { message: `Invalid project ID: ${req.params.id}` });
+    }
+
+    try {
+        const [project, sectors] = await Promise.all([
+            projectData.getProjectById(projectId),
+            projectData.getAllSectors()
+        ]);
+
+        if (!project) {
+            console.error(`Project with ID ${projectId} not found.`);
+            return res.status(404).render('404', { message: `Project with ID ${projectId} not found.` });
+        }
+
+        res.render('editProject', { project, sectors });
+
+    } catch (err) {
+        console.error("Error fetching project or sectors:", err);
+        res.status(500).render('500', { message: `Error loading project: ${err.message}` });
+    }
+});
+
+
+app.post('/solutions/editProject', (req, res) => {
+    console.log("Edit Request Data:", req.body);
+    projectData.editProject(req.body.id, req.body)
+        .then(() => {
+            res.redirect('/solutions/projects');
+        })
+        .catch(err => {
+            console.error("Error updating project:", err);
+            res.render('500', { message: `I'm sorry, but we have encountered the following error: ${err}` });
+        });
+});
+
+
 app.use((req, res) => {
     res.status(404).render('404');
 });
 
-// Initialize data
 projectData.initialize().then(() => {
     console.log("Project data initialized successfully.");
     app.listen(HTTP_PORT, ()=>{
@@ -86,7 +145,4 @@ projectData.initialize().then(() => {
 });
 
 
-
-
-// Export the app for Vercel
 module.exports = app;
