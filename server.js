@@ -1,20 +1,12 @@
 /********************************************************************************
-<<<<<<< HEAD
 * BTI325 – Assignment 05
-=======
-* BTI325 – Assignment 04
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
 *
 * I declare that this assignment is my own work in accordance with Seneca's
 * Academic Integrity Policy:
 *
 * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 *
-<<<<<<< HEAD
 * Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 15th 2024
-=======
-* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 2nd 2024
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
 *
 ********************************************************************************/
 
@@ -29,14 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
-<<<<<<< HEAD
 
 const HTTP_PORT = process.env.PORT || 8080;
-=======
-
-const HTTP_PORT = process.env.PORT || 8080;
-
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
 
 
 app.get('/', (req, res) => {
@@ -77,17 +63,13 @@ app.get('/solutions/projects', (req, res) => {
                 res.render("projects", {projects: projects});
             })
             .catch(error => {
-<<<<<<< HEAD
                 console.log("Projects error:");
-=======
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
                 res.status(404).render("404", {message: "I'm sorry, we're unable to find what you're looking for"});
             });
     }
 });
 
 
-<<<<<<< HEAD
 app.get('/solutions/addProject', (req, res) => {
     projectData.getAllSectors()
         .then(sectors => {
@@ -152,14 +134,6 @@ app.use((req, res) => {
     res.status(404).render('404');
 });
 
-=======
-// 404 handler for all other routes
-app.use((req, res) => {
-    res.status(404).render('404');
-});
-
-// Initialize data
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
 projectData.initialize().then(() => {
     console.log("Project data initialized successfully.");
     app.listen(HTTP_PORT, ()=>{
@@ -171,10 +145,4 @@ projectData.initialize().then(() => {
 });
 
 
-<<<<<<< HEAD
-=======
-
-
-// Export the app for Vercel
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
 module.exports = app;
