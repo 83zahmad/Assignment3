@@ -1,12 +1,12 @@
  /********************************************************************************
-* BTI325 – Assignment 05
+* BTI325 – Assignment 06
 *
 * I declare that this assignment is my own work in accordance with Seneca's
 * Academic Integrity Policy:
 *
 * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 *
-* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 15th 2024
+* Name: Zeeshaun Ahmad Student ID: 158043224  Date: December 8th 2024
 *
 ********************************************************************************/
 require('dotenv').config();

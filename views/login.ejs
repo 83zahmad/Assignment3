@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <%- include('partials/navbar', {page: '/login'}) %>
+    <br>
+    <div class="container mx-auto">
+        <div class="hero bg-base-200 rounded-lg p-6">
+            <div class="hero-content text-center">
+                <div class="max-w-md">
+                    <h1 class="text-5xl font-bold">Login</h1>
+                    <p class="py-6">Enter your credentials to access your account.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <% if (errorMessage) { %>
+                <div class="alert alert-error">
+                    <p><%= errorMessage %></p>
+                </div>
+            <% } %>
+            <form method="post" action="/login" class="space-y-4">
+                <label for="userName">Username:</label>
+                <input type="text" id="userName" name="userName" value="<%= userName %>" required class="w-full border rounded p-2"/>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required class="w-full border rounded p-2"/>
+
+                <button type="submit" class="btn btn-success mt-6">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

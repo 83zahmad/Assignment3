@@ -1,0 +1,63 @@
+<!-- /********************************************************************************
+* BTI325 – Assignment 06
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+*
+* Name: Zeeshaun Ahmad Student ID: 158043224  Date: December 8th 2024
+*
+********************************************************************************/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <%- include('partials/navbar', {page: '/register'}) %>
+    <br>
+    <div class="container mx-auto">
+        <div class="hero bg-base-200 rounded-lg p-6">
+            <div class="hero-content text-center">
+                <div class="max-w-md">
+                    <h1 class="text-5xl font-bold">Register</h1>
+                    <p class="py-6">Create a new account to access the platform.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <% if (successMessage) { %>
+                <div class="alert alert-success">
+                    <p><%= successMessage %></p>
+                </div>
+                <a href="/login" class="btn btn-primary mt-4">Proceed to Login</a>
+            <% } else { %>
+                <% if (errorMessage) { %>
+                    <div class="alert alert-error">
+                        <p><%= errorMessage %></p>
+                    </div>
+                <% } %>
+                <form method="post" action="/register" class="space-y-4">
+                    <label for="userName">Username:</label>
+                    <input type="text" id="userName" name="userName" value="<%= userName %>" required class="w-full border rounded p-2"/>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required class="w-full border rounded p-2"/>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required class="w-full border rounded p-2"/>
+
+                    <label for="password2">Confirm Password:</label>
+                    <input type="password" id="password2" name="password2" required class="w-full border rounded p-2"/>
+
+                    <button type="submit" class="btn btn-success mt-6">Register</button>
+                </form>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

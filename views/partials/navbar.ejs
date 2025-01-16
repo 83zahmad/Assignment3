@@ -1,18 +1,4 @@
-<!-- /********************************************************************************
-<<<<<<< HEAD
-* BTI325 – Assignment 05
-=======
-* BTI325 – Assignment 04
->>>>>>> 0e130dfd10304a0fdfea2f6d5b13332546705adf
-*
-* I declare that this assignment is my own work in accordance with Seneca's
-* Academic Integrity Policy:
-*
-* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
-*
-* Name: Zeeshaun Ahmad Student ID: 158043224  Date: November 15th 2024
-*
-********************************************************************************/ -->
+
 <div class="navbar bg-base-100">
   <div class="flex-1">
     <a class="btn btn-ghost normal-case text-xl" href="/">Climate Solutions</a>
@@ -38,7 +24,32 @@
           </ul>
         </details>
       </li>
-      <li><a class="<%= (page == '/solutions/addProject') ? 'active' : '' %>" href="/solutions/addProject">Add Project</a></li>
+      <% if (session && session.user) { %>
+      <li>
+        <details>
+          <summary>
+            Account: <%= session.user.userName %>
+          </summary>
+          <ul class="p-2 bg-base-100">
+            <li><a class="<%= (page == '/solutions/addProject') ? 'active' : '' %>" href="/solutions/addProject">Add Project</a></li>
+            <li><a class="<%= (page == '/userHistory') ? 'active' : '' %>" href="/userHistory">User History</a></li>
+            <li><a href="/logout">Log Out</a></li>
+          </ul>
+        </details>
+      </li>
+      <% } else { %>
+      <li>
+        <details>
+          <summary>
+            Account
+          </summary>
+          <ul class="p-2 bg-base-100">
+            <li><a class="<%= (page == '/login') ? 'active' : '' %>" href="/login">Login</a></li>
+            <li><a class="<%= (page == '/register') ? 'active' : '' %>" href="/register">Register</a></li>
+          </ul>
+        </details>
+      </li>
+      <% } %>
     </ul>
   </div>
   <div class="navbar-center hidden sm:flex">
@@ -52,7 +63,32 @@
           </ul>
         </details>
       </li>
-      <li><a class="<%= (page == '/solutions/addProject') ? 'active' : '' %>" href="/solutions/addProject">Add Project</a></li>
+      <% if (session && session.user) { %>
+      <li>
+        <details>
+          <summary>
+            Account: <%= session.user.userName %>
+          </summary>
+          <ul class="p-2 bg-base-100">
+            <li><a class="<%= (page == '/solutions/addProject') ? 'active' : '' %>" href="/solutions/addProject">Add Project</a></li>
+            <li><a class="<%= (page == '/userHistory') ? 'active' : '' %>" href="/userHistory">User History</a></li>
+            <li><a href="/logout">Log Out</a></li>
+          </ul>
+        </details>
+      </li>
+      <% } else { %>
+      <li>
+        <details>
+          <summary>
+            Account
+          </summary>
+          <ul class="p-2 bg-base-100">
+            <li><a class="<%= (page == '/login') ? 'active' : '' %>" href="/login">Login</a></li>
+            <li><a class="<%= (page == '/register') ? 'active' : '' %>" href="/register">Register</a></li>
+          </ul>
+        </details>
+      </li>
+      <% } %>
     </ul>
   </div>
 </div>

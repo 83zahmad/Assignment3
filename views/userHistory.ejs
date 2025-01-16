@@ -1,0 +1,52 @@
+<!-- /********************************************************************************
+* BTI325 – Assignment 06
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+*
+* Name: Zeeshaun Ahmad Student ID: 158043224  Date: December 8th 2024
+*
+********************************************************************************/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User History</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <%- include('partials/navbar', {page: '/userHistory'}) %>
+    <br>
+    <div class="container mx-auto">
+        <div class="hero bg-base-200 rounded-lg p-6">
+            <div class="hero-content text-center">
+                <div class="max-w-md">
+                    <h1 class="text-5xl font-bold">User History</h1>
+                    <p class="py-6">Login history for <%= session.user.userName %>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table-auto w-full border-collapse border border-gray-200">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="border p-2">Login Date/Time</th>
+                        <th class="border p-2">Client Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% session.user.loginHistory.forEach(entry => { %>
+                        <tr>
+                            <td class="border p-2"><%= entry.dateTime %></td>
+                            <td class="border p-2"><%= entry.userAgent %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
